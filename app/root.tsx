@@ -4,7 +4,14 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-} from "@remix-run/react";
+} from '@remix-run/react';
+import type { LinksFunction } from '@remix-run/node';
+
+import stylesheet from '@/globals.css?url';
+
+export const links: LinksFunction = () => [
+  { rel: 'stylesheet', href: stylesheet },
+];
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
