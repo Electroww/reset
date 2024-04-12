@@ -11,10 +11,10 @@ const buttonVariants = cva(
       variant: {
         default:
           'bg-primary text-primary-foreground shadow-btn hover:bg-primary/90',
+        outline: 'bg-background bg-gradient-to-b from-primary/40 to-primary',
+        // Not used
         destructive:
           'bg-destructive text-destructive-foreground hover:bg-destructive/90',
-        outline:
-          'border border-input bg-background hover:bg-accent hover:text-accent-foreground',
         secondary:
           'bg-secondary text-secondary-foreground hover:bg-secondary/80',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
@@ -22,7 +22,8 @@ const buttonVariants = cva(
       },
       size: {
         default: 'h-12 px-12 py-2',
-        sm: 'h-9 rounded-md px-3',
+        // Not used
+        sm: 'h-9 rounded-[13px] p-[1px]',
         lg: 'h-11 rounded-md px-8',
         icon: 'h-10 w-10',
       },
@@ -48,7 +49,15 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         {...props}
-      />
+      >
+        {variant === 'outline' ? (
+          <div className="bg-white h-full w-full rounded-xl px-5 flex items-center text-primary transition-all hover:bg-white/90">
+            {props.children}
+          </div>
+        ) : (
+          props.children
+        )}
+      </Comp>
     );
   }
 );
