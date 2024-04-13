@@ -6,6 +6,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion-card';
+import { Input } from '@/components/ui/input';
 
 export default function Index() {
   return (
@@ -13,6 +14,9 @@ export default function Index() {
       <Button className="w-fit">Button</Button>
       <Button variant="outline" size="sm" className="w-fit">
         Un autre bouton
+      </Button>
+      <Button variant="ghost" className="w-fit">
+        Button
       </Button>
       <Card>
         <Accordion type="single" collapsible>
@@ -52,6 +56,7 @@ export default function Index() {
           </AccordionItem>
         </Accordion>
       </Card>
+      <Input placeholder="Ceci est un test de placeholder" />
     </div>
   );
 }

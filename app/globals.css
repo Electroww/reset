@@ -74,8 +74,9 @@
   * {
     @apply border-border text-dark font-sans;
   }
-  body {
-    @apply bg-background text-foreground;
+  body,
+  html {
+    @apply h-full w-full;
   }
   .shadow-btn {
     box-shadow:
@@ -86,5 +87,8 @@
   }
   .shadow-card {
     box-shadow: 0px 2px 0px 1px rgba(232, 180, 19, 0.1);
+  }
+  .reset-borders {
+    @apply border border-primary border-opacity-80;
   }
 }
