@@ -1,0 +1,13 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1713473353212,
+      "tag": "0000_nice_living_tribunal",
+      "breakpoints": true
+    }
+  ]
+}
