@@ -3,6 +3,8 @@ import { Input } from '@/components/ui/input';
 import { Form, json } from '@remix-run/react';
 import type { ActionFunctionArgs } from '@remix-run/node';
 import { createUser } from '@/.server/services/auth';
+import { getSession, commitSession } from '../sessions';
+import { AuthError } from '@supabase/supabase-js';
 
 export default function register() {
   return (
@@ -38,10 +40,18 @@ export default function register() {
 export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
 
-  return createUser({
+  const session = await getSession(request.headers.get('Cookie'));
+  const data = await createUser({
     fullname: formData.get('fullname') as string,
     email: formData.get('email') as string,
     password: formData.get('password') as string,
   });
+  console.log(data)
+  if (data?.session?.access_token){
+    session.set("jwt", data.session.access_token);
+    session.set("email", data.user.email);
 
+    return "ok";
+  }
+  return 'error';
 }
