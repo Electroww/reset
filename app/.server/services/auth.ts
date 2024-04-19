@@ -1,5 +1,11 @@
 import { db } from '../database/client';
 import { user } from '../model/user';
+import { createClient } from '@supabase/supabase-js';
+
+const supabase = createClient(
+  process.env.PROJECT_URL || '',
+  process.env.ANON_PUBLIC || ''
+);
 
 type Credentials = {
   fullname: string;
@@ -7,12 +13,16 @@ type Credentials = {
   password: string;
 };
 
-const createUser = ({ fullname, email, password }: Credentials) => {
-  return db.insert(user).values({
-    fullName: fullname,
-    email,
-    password,
+const createUser = async ({ fullname, email, password }: Credentials) => {
+  console.log('pour le fullname on verra');
+  const { data, error } = await supabase.auth.signUp({
+    email: email,
+    password: password,
   });
+  if (error !== null) {
+    return error;
+  }
+  return data;
 };
 
 export { createUser };

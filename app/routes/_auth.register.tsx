@@ -38,11 +38,10 @@ export default function register() {
 export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
 
-  await createUser({
+  return createUser({
     fullname: formData.get('fullname') as string,
     email: formData.get('email') as string,
     password: formData.get('password') as string,
   });
 
-  return json({ ok: true });
 }
