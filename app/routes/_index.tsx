@@ -1,4 +1,5 @@
-import type { MetaFunction } from '@remix-run/node';
+import { isUserLoggedIn } from '@/.server/services/session';
+import type { ActionFunctionArgs, MetaFunction } from '@remix-run/node';
 
 export const meta: MetaFunction = () => {
   return [
@@ -39,3 +40,9 @@ export default function Index() {
     </div>
   );
 }
+
+export const loader = async ({ request }: ActionFunctionArgs) => {
+  isUserLoggedIn(request);
+
+  return 'ok';
+};
