@@ -1,14 +1,9 @@
 import { CreateUserDto } from '@/types/createUserDto';
-import { createClient } from '@supabase/supabase-js';
-
-const supabase = createClient(
-  process.env.PROJECT_URL || '',
-  process.env.ANON_PUBLIC || ''
-);
+import supabaseAuth from '../database/auth';
 
 const createUser = async ({ fullname, email, password }: CreateUserDto) => {
   console.log('pour le fullname on verra');
-  const { data, error } = await supabase.auth.signUp({
+  const { data, error } = await supabaseAuth.auth.signUp({
     email: email,
     password: password,
   });
