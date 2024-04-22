@@ -6,6 +6,7 @@ import { createUser } from '@/.server/services/auth';
 import { getSession, commitSession } from '../sessions';
 import { AuthError } from '@supabase/supabase-js';
 import { CreateUserDto } from '@/types/createUserDto';
+import { redirect } from "@remix-run/node"; // or cloudflare/deno
 
 export default function register() {
   return (
@@ -51,7 +52,11 @@ export async function action({ request }: ActionFunctionArgs) {
 
   if (data && 'session' in data && data.session?.access_token) {
     session.set("jwt", data.session.access_token);
-    return "ok";
+    return redirect("/login", {
+      headers: {
+        "Set-Cookie": await commitSession(session),
+      },
+    });
   }
   return 'error';
 }

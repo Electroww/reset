@@ -42,7 +42,7 @@ export const loader = async ({
 }: ActionFunctionArgs) => {
 
   const session = await getSession(request.headers.get('Cookie'));
-  console.log(session.get('jwt'));
+  console.log(session, session.get('jwt'));
   const { data: { user } } = await supabaseAuth.auth.getUser(
     
   );
