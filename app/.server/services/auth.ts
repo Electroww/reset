@@ -1,5 +1,4 @@
-import { db } from '../database/client';
-import { user } from '../model/user';
+import { CreateUserDto } from '@/types/createUserDto';
 import { createClient } from '@supabase/supabase-js';
 
 const supabase = createClient(
@@ -7,13 +6,7 @@ const supabase = createClient(
   process.env.ANON_PUBLIC || ''
 );
 
-type Credentials = {
-  fullname: string;
-  email: string;
-  password: string;
-};
-
-const createUser = async ({ fullname, email, password }: Credentials) => {
+const createUser = async ({ fullname, email, password }: CreateUserDto) => {
   console.log('pour le fullname on verra');
   const { data, error } = await supabase.auth.signUp({
     email: email,

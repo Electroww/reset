@@ -2,7 +2,7 @@
 import { createCookieSessionStorage } from '@remix-run/node'; // or cloudflare/deno
 
 type SessionData = {
-  userId: string;
+  jwt: string;
 };
 
 type SessionFlashData = {

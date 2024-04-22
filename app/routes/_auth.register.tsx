@@ -5,6 +5,7 @@ import type { ActionFunctionArgs } from '@remix-run/node';
 import { createUser } from '@/.server/services/auth';
 import { getSession, commitSession } from '../sessions';
 import { AuthError } from '@supabase/supabase-js';
+import { CreateUserDto } from '@/types/createUserDto';
 
 export default function register() {
   return (
@@ -42,15 +43,14 @@ export async function action({ request }: ActionFunctionArgs) {
 
   const session = await getSession(request.headers.get('Cookie'));
   const data = await createUser({
-    fullname: formData.get('fullname') as string,
-    email: formData.get('email') as string,
-    password: formData.get('password') as string,
-  });
+    fullname: formData.get('fullname'),
+    email: formData.get('email'),
+    password: formData.get('password'),
+  } as CreateUserDto);
   console.log(data)
-  if (data?.session?.access_token){
-    session.set("jwt", data.session.access_token);
-    session.set("email", data.user.email);
 
+  if (data && 'session' in data && data.session?.access_token) {
+    session.set("jwt", data.session.access_token);
     return "ok";
   }
   return 'error';
