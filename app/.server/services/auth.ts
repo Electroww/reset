@@ -1,21 +1,21 @@
 import { CreateUserDto } from '@/types/createUserDto';
-import { createClient } from '@supabase/supabase-js';
+import supabaseAuth from '../database/auth';
 
-const supabase = createClient(
-  process.env.PROJECT_URL || '',
-  process.env.ANON_PUBLIC || ''
-);
+enum ErrorCodes {
+  WEAK_PASSWORD = 'weak_password',
+  USER_ALREADY_EXISTS = 'user_already_exists',
+}
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const createUser = async ({ fullname, email, password }: CreateUserDto) => {
-  console.log('pour le fullname on verra');
-  const { data, error } = await supabase.auth.signUp({
+  const { data, error } = await supabaseAuth.auth.signUp({
     email: email,
     password: password,
   });
   if (error !== null) {
-    return error;
+    return { error: error.code };
   }
   return data;
 };
 
-export { createUser };
+export { createUser, ErrorCodes };
