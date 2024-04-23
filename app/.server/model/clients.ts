@@ -4,11 +4,15 @@ import { teams } from './teams';
 import { companies } from './companies';
 
 export const clients = pgTable('clients', {
-  client_id: serial('client_id').primaryKey(),
+  id: serial('id').primaryKey(),
   job: text('job').notNull(),
+  companyId: serial('company_id'),
 });
 
 export const clientsRelations = relations(clients, ({ many, one }) => ({
   teams: many(teams),
-  company: one(companies),
+  company: one(companies, {
+    fields: [clients.companyId],
+    references: [companies.id],
+  }),
 }));
