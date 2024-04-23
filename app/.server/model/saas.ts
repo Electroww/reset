@@ -1,6 +1,6 @@
-import { sql } from 'drizzle-orm';
-import { timestamp, pgTable, serial, text, bigint } from 'drizzle-orm/pg-core';
-import { group } from './group';
+import { relations, sql } from 'drizzle-orm';
+import { timestamp, pgTable, serial, text } from 'drizzle-orm/pg-core';
+import { teams } from './teams';
 
 export const saas = pgTable('saas', {
   id: serial('id').primaryKey(),
@@ -10,9 +10,6 @@ export const saas = pgTable('saas', {
   createdAt: timestamp('created_at').default(sql`now()`),
 });
 
-export const groupeSaas = pgTable('groupe_saas', {
-  id: serial('id').primaryKey(),
-  groupId: bigint('group_id', { mode: 'number' }).references(() => group.id),
-  saasId: bigint('saas_id', { mode: 'number' }).references(() => saas.id),
-  createdAt: timestamp('created_at').default(sql`now()`),
-});
+export const saasRelations = relations(saas, ({ many }) => ({
+  teams: many(teams),
+}));
