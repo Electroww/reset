@@ -21,5 +21,3 @@ CREATE TABLE IF NOT EXISTS "teams" (
 	"name" text NOT NULL,
 	"created_at" timestamp DEFAULT now()
 );
---> statement-breakpoint
-DROP TABLE "user";

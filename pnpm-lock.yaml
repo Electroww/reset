@@ -85,8 +85,8 @@ importers:
         specifier: ^10.4.19
         version: 10.4.19(postcss@8.4.38)
       drizzle-kit:
-        specifier: ^0.20.14
-        version: 0.20.14
+        specifier: ^0.20.17
+        version: 0.20.17
       eslint:
         specifier: ^8.38.0
         version: 8.57.0
@@ -299,9 +299,6 @@ packages:
   '@babel/types@7.24.0':
     resolution: {integrity: sha512-+j7a5c253RfKh8iABBhywc8NSfP5LURe7Uh4qpsh6jc+aLJguvmIUBdjSdEMQv2bENrCR5MfRdjGo7vzS/ob7w==}
     engines: {node: '>=6.9.0'}
-
-  '@drizzle-team/studio@0.0.39':
-    resolution: {integrity: sha512-c5Hkm7MmQC2n5qAsKShjQrHoqlfGslB8+qWzsGGZ+2dHMRTNG60UuzalF0h0rvBax5uzPXuGkYLGaQ+TUX3yMw==}
 
   '@emotion/hash@0.9.1':
     resolution: {integrity: sha512-gJB6HLm5rYwSLI6PQa+X1t5CFGrv1J1TWG+sOyMCeKz2ojaj6Fnl/rZEspogG+cvqbt4AE/2eIyD2QfLKTBNlQ==}
@@ -869,6 +866,16 @@ packages:
   '@eslint/js@8.57.0':
     resolution: {integrity: sha512-Ys+3g2TaW7gADOJzPt83SJtCDhMjndcDMFVQ/Tj9iA1BfJzFKD9mAUXT3OenpuPHbI6P/myECxRJrofUsDx/5g==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+
+  '@hono/node-server@1.11.0':
+    resolution: {integrity: sha512-TLIJq9TMtD1NEG1mVoqNUn1Ita0qSaB5XboZErjFBcO/GJYXwWY4dVdTi9G0lbxtu0x+hJXDItcLaFHb7rlFTw==}
+    engines: {node: '>=18.14.1'}
+
+  '@hono/zod-validator@0.2.1':
+    resolution: {integrity: sha512-HFoxln7Q6JsE64qz2WBS28SD33UB2alp3aRKmcWnNLDzEL1BLsWfbdX6e1HIiUprHYTIXf5y7ax8eYidKUwyaA==}
+    peerDependencies:
+      hono: '>=3.9.0'
+      zod: ^3.19.1
 
   '@humanwhocodes/config-array@0.11.14':
     resolution: {integrity: sha512-3T8LkOmg45BV5FICb15QQMsyUSWrQ8AygVfC7ZG32zOalnqrilm018ZVCw0eapXux8FtA33q8PSRSstjee3jSg==}
@@ -1897,8 +1904,8 @@ packages:
     resolution: {integrity: sha512-vyJTp8+mC+G+5dfgsY+r3ckxlz+QMX40VjPQsZc5gxVAxLmi64TBoVkP54A/pRAXMXsbu2GMMBrZPxNv23waMg==}
     engines: {node: '>=0.4.0'}
 
-  drizzle-kit@0.20.14:
-    resolution: {integrity: sha512-0fHv3YIEaUcSVPSGyaaBfOi9bmpajjhbJNdPsRMIUvYdLVxBu9eGjH8mRc3Qk7HVmEidFc/lhG1YyJhoXrn5yA==}
+  drizzle-kit@0.20.17:
+    resolution: {integrity: sha512-mLVDS4nXmO09wFVlzGrdshWnAL+U9eQGC5zRs6hTN6Q9arwQGWU2XnZ17I8BM8Quau8CQRx3Ms6VPgRWJFVp7Q==}
     hasBin: true
 
   drizzle-orm@0.30.8:
@@ -2504,6 +2511,10 @@ packages:
 
   heap@0.2.7:
     resolution: {integrity: sha512-2bsegYkkHO+h/9MGbn6KWcE45cHZgPANo5LXF7EvWdT0yT2EguSVO1nDgU5c8+ZOPwp2vMNa7YFsJhVcDR9Sdg==}
+
+  hono@4.2.7:
+    resolution: {integrity: sha512-k1xHi86tJnRIVvqhFMBDGFKJ8r5O+bEsT4P59ZK59r0F300Xd910/r237inVfuT/VmE86RQQffX4OYNda6dLXw==}
+    engines: {node: '>=16.0.0'}
 
   hosted-git-info@6.1.1:
     resolution: {integrity: sha512-r0EI+HBMcXadMrugk0GCQ+6BQV39PiWAZVfq7oIckeGiN7sjRGyQxPdft3nQekFTCQbYxLBH+/axZMeH8UX6+w==}
@@ -4448,10 +4459,6 @@ snapshots:
       '@babel/helper-validator-identifier': 7.22.20
       to-fast-properties: 2.0.0
 
-  '@drizzle-team/studio@0.0.39':
-    dependencies:
-      superjson: 2.2.1
-
   '@emotion/hash@0.9.1': {}
 
   '@esbuild-kit/core-utils@3.3.2':
@@ -4756,6 +4763,13 @@ snapshots:
       - supports-color
 
   '@eslint/js@8.57.0': {}
+
+  '@hono/node-server@1.11.0': {}
+
+  '@hono/zod-validator@0.2.1(hono@4.2.7)(zod@3.22.4)':
+    dependencies:
+      hono: 4.2.7
+      zod: 3.22.4
 
   '@humanwhocodes/config-array@0.11.14':
     dependencies:
@@ -5956,10 +5970,11 @@ snapshots:
     dependencies:
       wordwrap: 1.0.0
 
-  drizzle-kit@0.20.14:
+  drizzle-kit@0.20.17:
     dependencies:
-      '@drizzle-team/studio': 0.0.39
       '@esbuild-kit/esm-loader': 2.6.5
+      '@hono/node-server': 1.11.0
+      '@hono/zod-validator': 0.2.1(hono@4.2.7)(zod@3.22.4)
       camelcase: 7.0.1
       chalk: 5.3.0
       commander: 9.5.0
@@ -5968,9 +5983,11 @@ snapshots:
       esbuild-register: 3.5.0(esbuild@0.19.12)
       glob: 8.1.0
       hanji: 0.0.5
+      hono: 4.2.7
       json-diff: 0.9.0
       minimatch: 7.4.6
       semver: 7.6.0
+      superjson: 2.2.1
       zod: 3.22.4
     transitivePeerDependencies:
       - supports-color
@@ -6811,6 +6828,8 @@ snapshots:
   hast-util-whitespace@2.0.1: {}
 
   heap@0.2.7: {}
+
+  hono@4.2.7: {}
 
   hosted-git-info@6.1.1:
     dependencies:
