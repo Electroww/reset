@@ -7,6 +7,6 @@ const connectionString = dotenv.config().parsed?.DATABASE_URL || '';
 
 const sql = postgres(connectionString, { max: 1 });
 const db = drizzle(sql);
-console.log(db);
+console.log(sql);
 await migrate(db, { migrationsFolder: './drizzle' });
 await sql.end();

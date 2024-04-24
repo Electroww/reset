@@ -1,5 +1,5 @@
 {
-  "id": "cfbc3060-5f05-4f70-af31-23ac17985da4",
+  "id": "5f3ec4d1-094f-4148-a211-650110a34834",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -8,8 +8,8 @@
       "name": "clients",
       "schema": "",
       "columns": {
-        "client_id": {
-          "name": "client_id",
+        "id": {
+          "name": "id",
           "type": "serial",
           "primaryKey": true,
           "notNull": true
@@ -19,6 +19,12 @@
           "type": "text",
           "primaryKey": false,
           "notNull": true
+        },
+        "company_id": {
+          "name": "company_id",
+          "type": "serial",
+          "primaryKey": false,
+          "notNull": true
         }
       },
       "indexes": {},
@@ -26,12 +32,61 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "companies": {
-      "name": "companies",
+    "clients_to_teams": {
+      "name": "clients_to_teams",
       "schema": "",
       "columns": {
         "client_id": {
           "name": "client_id",
+          "type": "serial",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "team_id": {
+          "name": "team_id",
+          "type": "serial",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "clients_to_teams_client_id_clients_id_fk": {
+          "name": "clients_to_teams_client_id_clients_id_fk",
+          "tableFrom": "clients_to_teams",
+          "tableTo": "clients",
+          "columnsFrom": [
+            "client_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "clients_to_teams_team_id_teams_id_fk": {
+          "name": "clients_to_teams_team_id_teams_id_fk",
+          "tableFrom": "clients_to_teams",
+          "tableTo": "teams",
+          "columnsFrom": [
+            "team_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "companies": {
+      "name": "companies",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
           "type": "serial",
           "primaryKey": true,
           "notNull": true
@@ -89,6 +144,63 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
+    "saas_to_teams": {
+      "name": "saas_to_teams",
+      "schema": "",
+      "columns": {
+        "saas_id": {
+          "name": "saas_id",
+          "type": "serial",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "team_id": {
+          "name": "team_id",
+          "type": "serial",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "saas_to_teams_saas_id_saas_id_fk": {
+          "name": "saas_to_teams_saas_id_saas_id_fk",
+          "tableFrom": "saas_to_teams",
+          "tableTo": "saas",
+          "columnsFrom": [
+            "saas_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "saas_to_teams_team_id_teams_id_fk": {
+          "name": "saas_to_teams_team_id_teams_id_fk",
+          "tableFrom": "saas_to_teams",
+          "tableTo": "teams",
+          "columnsFrom": [
+            "team_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "saas_to_teams_saas_id_team_id_pk": {
+          "name": "saas_to_teams_saas_id_team_id_pk",
+          "columns": [
+            "saas_id",
+            "team_id"
+          ]
+        }
+      },
+      "uniqueConstraints": {}
+    },
     "teams": {
       "name": "teams",
       "schema": "",
@@ -111,6 +223,12 @@
           "primaryKey": false,
           "notNull": false,
           "default": "now()"
+        },
+        "company_id": {
+          "name": "company_id",
+          "type": "serial",
+          "primaryKey": false,
+          "notNull": true
         }
       },
       "indexes": {},
