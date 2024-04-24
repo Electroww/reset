@@ -16,3 +16,23 @@ export const clientsRelations = relations(clients, ({ many, one }) => ({
     references: [companies.id],
   }),
 }));
+
+export const clientsToTeams = pgTable('clients_to_teams', {
+  clientId: serial('client_id')
+    .notNull()
+    .references(() => clients.id),
+  teamId: serial('team_id')
+    .notNull()
+    .references(() => teams.id),
+});
+
+export const clientsToTeamsRelations = relations(clientsToTeams, ({ one }) => ({
+  client: one(clients, {
+    fields: [clientsToTeams.clientId],
+    references: [clients.id],
+  }),
+  team: one(teams, {
+    fields: [clientsToTeams.teamId],
+    references: [teams.id],
+  }),
+}));
