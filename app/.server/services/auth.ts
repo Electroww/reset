@@ -41,7 +41,6 @@ const createUser = async ({
         companyId: idCompany[0].id,
       });
     }
-
     return data;
   });
 

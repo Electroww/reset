@@ -19,3 +19,5 @@ export const teamsRelations = relations(teams, ({ many, one }) => ({
   clients: many(clients),
   saas: many(saas),
 }));
+
+export type Teams = typeof teams.$inferSelect;

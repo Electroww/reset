@@ -1,7 +1,22 @@
+import { Teams } from '@/.server/model/teams';
+import { getUserSessionId } from '@/.server/services/session';
+import { getTeamByUserId } from '@/.server/services/teams';
 import { Button } from '@/components/ui/button';
-import { Form, Outlet } from '@remix-run/react';
+import { Input } from '@/components/ui/input';
+import { json, LoaderFunctionArgs } from '@remix-run/node';
+import { Outlet, useFetcher, useLoaderData } from '@remix-run/react';
+import { useState } from 'react';
 
 export default function App() {
+  const fetcher = useFetcher();
+  const { teams } = useLoaderData<{ teams: Teams[] }>();
+
+  const [isCreatingTeam, setIsCreatingTeam] = useState(false);
+
+  const closeForm = () => {
+    setIsCreatingTeam(false);
+  };
+
   return (
     <div className="grid w-full md:grid-cols-[320px_1fr] lg:grid-cols-[380px_1fr] min-h-screen w-">
       <div className="hidden border-r reset-borders bg-primary bg-opacity-5 md:block">
@@ -16,18 +31,35 @@ export default function App() {
                 <div className="flex text-lg font-bold items-center gap-3 rounded-lg  transition-all hover:text-primary cursor-pointer">
                   Team
                 </div>
-                <div>Pas de team :(</div>
-                <Form method="post">
-                  <Button
-                    value="create"
-                    type="submit"
-                    variant="outline"
-                    size="sm"
-                    className="w-fit"
-                  >
-                    Ajouter une team
-                  </Button>
-                </Form>
+                {teams.length ? (
+                  <ul>
+                    {teams.map((team) => (
+                      <li key={team.id}>{team.name}</li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p>
+                    <i>No teams</i>
+                  </p>
+                )}
+                {isCreatingTeam ? (
+                  <fetcher.Form method="post" onSubmit={() => closeForm()}>
+                    <Input
+                      type="text"
+                      name="teamName"
+                      defaultValue="Nouvelle Team"
+                    />
+                  </fetcher.Form>
+                ) : null}
+
+                <Button
+                  onClick={() => setIsCreatingTeam(true)}
+                  variant="outline"
+                  size="sm"
+                  className="w-fit"
+                >
+                  Ajouter une team
+                </Button>
               </div>
             </nav>
           </div>
@@ -40,3 +72,9 @@ export default function App() {
     </div>
   );
 }
+
+export const loader = async ({ request }: LoaderFunctionArgs) => {
+  const userId = await getUserSessionId(request);
+  const teams = await getTeamByUserId(userId);
+  return json({ teams: teams });
+};
