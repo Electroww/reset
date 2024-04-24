@@ -24,6 +24,10 @@ export default function Register() {
           <Input name="fullname" type="text" />
         </div>
         <div>
+          <span className="font-semibold">Entrepise</span>
+          <Input name="company" type="text" />
+        </div>
+        <div>
           <span className="font-semibold">Email</span>
           <Input name="email" type="email" />
         </div>
@@ -49,6 +53,7 @@ export async function action({ request }: ActionFunctionArgs) {
     fullname: formData.get('fullname'),
     email: formData.get('email'),
     password: formData.get('password'),
+    company: formData.get('company'),
   } as CreateUserDto);
 
   if (data && 'session' in data && data.session?.access_token) {

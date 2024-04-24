@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "generate": "drizzle-kit generate:pg",
-    "migrate": "tsx app/.server/database/migrate.ts",
+    "migrate": "tsx ./migrate.ts",
+    "push": "drizzle-kit push:pg",
     "build": "remix vite:build",
     "dev": "remix vite:dev",
     "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",

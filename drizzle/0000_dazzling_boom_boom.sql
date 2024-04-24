@@ -1,11 +1,11 @@
 CREATE TABLE IF NOT EXISTS "clients" (
-	"id" serial PRIMARY KEY NOT NULL,
-	"job" text NOT NULL,
+	"id" text PRIMARY KEY NOT NULL,
+	"job" text,
 	"company_id" serial NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "clients_to_teams" (
-	"client_id" serial NOT NULL,
+	"client_id" text NOT NULL,
 	"team_id" serial NOT NULL
 );
 --> statement-breakpoint

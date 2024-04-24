@@ -1,6 +1,6 @@
 {
-  "id": "2ad96e18-a462-400c-8f69-1c27d2f76442",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "b6ea13b3-0eae-4c52-aa7b-78476545a543",
+  "prevId": "2ad96e18-a462-400c-8f69-1c27d2f76442",
   "version": "5",
   "dialect": "pg",
   "tables": {
@@ -12,6 +12,12 @@
           "name": "id",
           "type": "text",
           "primaryKey": true,
+          "notNull": true
+        },
+        "fullname": {
+          "name": "fullname",
+          "type": "text",
+          "primaryKey": false,
           "notNull": true
         },
         "job": {

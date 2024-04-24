@@ -1,0 +1,1 @@
+ALTER TABLE "clients" ADD COLUMN "fullname" text NOT NULL;
