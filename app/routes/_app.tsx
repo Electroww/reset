@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
-import { Outlet } from '@remix-run/react';
+import { Form, Outlet } from '@remix-run/react';
 
-export default function _app() {
+export default function App() {
   return (
     <div className="grid w-full md:grid-cols-[320px_1fr] lg:grid-cols-[380px_1fr] min-h-screen w-">
       <div className="hidden border-r reset-borders bg-primary bg-opacity-5 md:block">
@@ -17,9 +17,17 @@ export default function _app() {
                   Team
                 </div>
                 <div>Pas de team :(</div>
-                <Button variant="outline" size="sm" className="w-fit">
-                  Ajouter une team
-                </Button>
+                <Form method="post">
+                  <Button
+                    value="create"
+                    type="submit"
+                    variant="outline"
+                    size="sm"
+                    className="w-fit"
+                  >
+                    Ajouter une team
+                  </Button>
+                </Form>
               </div>
             </nav>
           </div>
